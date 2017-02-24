@@ -23,16 +23,16 @@ unless fetch(:environments).nil?
     desc "Set the environment to #{environment}."
     task(environment) do
       set :rails_env, environment
-      set :branch, ENV['branch'] || config[rails_env]['branch']
-      set :user, config[rails_env]['user']
-      set :domain, config[rails_env]['domain']
-      set :app, config[rails_env]['app']
-      set :repository, config[rails_env]['repository']
-      set :shared_paths, config[rails_env]['shared_paths']
-      set :start_sidekiq, config[rails_env]['start_sidekiq'] if config[rails_env]['start_sidekiq']
-      set :start_rpush, config[rails_env]['start_rpush']if config[rails_env]['start_rpush']
+      set :branch, ENV['branch'] || fetch(:config)[rails_env]['branch']
+      set :user, fetch(:config)[rails_env]['user']
+      set :domain, fetch(:config)[rails_env]['domain']
+      set :app, fetch(:config)[rails_env]['app']
+      set :repository, fetch(:config)[rails_env]['repository']
+      set :shared_paths, fetch(:config)[rails_env]['shared_paths']
+      set :start_sidekiq, fetch(:config)[rails_env]['start_sidekiq'] if fetch(:config)[rails_env]['start_sidekiq']
+      set :start_rpush, fetch(:config)[rails_env]['start_rpush']if fetch(:config)[rails_env]['start_rpush']
 
-      set :deploy_to, "/srv/app/#{app}"
+      set :deploy_to, "/srv/app/#{fetch(:app)}"
 
       set :ruby_version, File.read('.ruby-version')
 
