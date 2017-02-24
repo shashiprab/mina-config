@@ -18,7 +18,7 @@ unless fetch(:config).nil?
   set :environments, envs
 end
 
-unless environments.nil?
+unless fetch(:environments).nil?
   fetch(:environments).each do |environment|
     desc "Set the environment to #{environment}."
     task(environment) do
