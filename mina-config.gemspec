@@ -6,8 +6,8 @@ require 'mina/config/version'
 Gem::Specification.new do |spec|
   spec.name          = "mina-config"
   spec.version       = Mina::Config::VERSION
-  spec.authors       = ["Zachary Mckenzie"]
-  spec.email         = ["Zachary.Mckenzie@agapered.com"]
+  spec.authors       = ["Zachary Mckenzie", "Shashi Prabhakar"]
+  spec.email         = ["Zachary.Mckenzie@agapered.com", "shaship@yahoo.com"]
   spec.summary       = %q{Adds a multi-environment yml configuration file to mina}
   spec.description   = %q{Adds a multi-environment yml configuration file to mina. Environment configuration is dynamically created by the definitions in the deploy.yml file.}
   spec.homepage      = ""
