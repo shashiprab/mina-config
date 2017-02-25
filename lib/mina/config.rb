@@ -26,17 +26,15 @@ unless fetch(:environments).nil?
       set :branch, ENV['branch'] || fetch(:config)[fetch(:rails_env)]['branch']
       set :user, fetch(:config)[fetch(:rails_env)]['user']
       set :domain, fetch(:config)[fetch(:rails_env)]['domain']
-      set :app, fetch(:config)[fetch(:rails_env)]['app']
       set :repository, fetch(:config)[fetch(:rails_env)]['repository']
       set :shared_paths, fetch(:config)[fetch(:rails_env)]['shared_paths']
       set :start_sidekiq, fetch(:config)[fetch(:rails_env)]['start_sidekiq'] if fetch(:config)[fetch(:rails_env)]['start_sidekiq']
       set :start_rpush, fetch(:config)[fetch(:rails_env)]['start_rpush']if fetch(:config)[fetch(:rails_env)]['start_rpush']
 
-      set :deploy_to, "/srv/app/#{fetch(:app)}"
-
+      set :deploy_to, fetch(:deploy_to) || File.join(fetch(:deploy_path), fetch(:domain))
       set :ruby_version, File.read('.ruby-version')
 
-      invoke :"rvm:use[#{fetch(:ruby_version)}]"
+      invoke :'rvm:use', fetch(:ruby_version)
     end
   end
 
@@ -68,7 +66,7 @@ namespace :config do
 
       deploy_yml = "
           common: &common
-                app: #{app_params[:common][:app_name]}
+                application_name: #{app_params[:common][:app_name]}
                 repository: #{app_params[:common][:repo]}
                 shared_paths: 
                   - 'config/database.yml'
