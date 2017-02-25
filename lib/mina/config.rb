@@ -32,7 +32,7 @@ unless fetch(:environments).nil?
       set :start_rpush, fetch(:config)[fetch(:rails_env)]['start_rpush']if fetch(:config)[fetch(:rails_env)]['start_rpush']
 
       set :deploy_to, fetch(:deploy_to) || File.join(fetch(:deploy_path), fetch(:domain))
-      set :ruby_version, File.read('.ruby-version')
+      set :ruby_version, File.read('.ruby-version').strip!
 
       invoke :'rvm:use', fetch(:ruby_version)
     end
