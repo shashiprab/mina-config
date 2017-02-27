@@ -31,14 +31,14 @@ unless fetch(:environments).nil?
       set :start_sidekiq, fetch(:config)[fetch(:rails_env)]['start_sidekiq'] if fetch(:config)[fetch(:rails_env)]['start_sidekiq']
       set :start_rpush, fetch(:config)[fetch(:rails_env)]['start_rpush']if fetch(:config)[fetch(:rails_env)]['start_rpush']
 
-      set :deploy_to, fetch(:deploy_to) || File.join(fetch(:deploy_path), fetch(:domain))
+      set :deploy_to, fetch(:deploy_to) || File.join('/var/www/', fetch(:domain))
       set :ruby_version, File.read('.ruby-version').strip!
 
       invoke :'rvm:use', fetch(:ruby_version)
     end
   end
 
-  unless fetch(:environments).include?(ARGV.first)
+  if fetch(:environments).include?(ARGV.first)
     invoke default_env
   end
 end
