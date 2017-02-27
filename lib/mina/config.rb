@@ -33,8 +33,6 @@ unless fetch(:environments).nil?
 
       set :deploy_to, fetch(:deploy_to) || File.join('/var/www/', fetch(:domain))
       set :ruby_version, File.read('.ruby-version').strip!
-
-      invoke :'rvm:use', fetch(:ruby_version)
     end
   end
 
